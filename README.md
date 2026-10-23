@@ -64,5 +64,23 @@ python3 -m unittest discover -s tests -v
 
 They exercise synthetic per-face descriptors, RGB conversion/annotation order,
 single-face registration, database validation, failed saves, and camera cleanup
-using fakes. Real-camera compatibility, recognition quality, and model performance
-still require a separate manual test with consented images or participants.
+using fakes.
+
+After installing the requirements, check the actual OpenCV/dlib/NumPy runtime and
+the two standard model files without opening a camera or reading stored faces:
+
+```sh
+python tests/runtime_smoke.py -v
+```
+
+This opt-in suite generates blank and random pixel arrays in memory. It checks
+the real detector's empty result, 68-point prediction and 128-number descriptors
+for two supplied rectangles, OpenCV conversion and drawing, and temporary legacy
+NumPy database round trips. Capture and window calls are replaced during the
+camera-loop check; no camera device or window opens. Supplied rectangles on
+generated pixels test the API contract, not successful face detection or identity.
+The suite has passed on macOS arm64 with Python 3.12.11, OpenCV 4.14.0,
+dlib 20.0.1, and NumPy 2.5.4.
+
+Real-camera compatibility, recognition quality, and model performance still
+require a separate manual test with consented images or participants.
