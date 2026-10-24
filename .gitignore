@@ -1,0 +1,6 @@
+__pycache__/
+*.py[cod]
+.venv/
+# The legacy tracked database is retained; ignore newly generated databases.
+*.pkl
+.*.pkl.*.tmp
